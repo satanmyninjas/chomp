@@ -25,6 +25,26 @@ class Board:
         return f'Board({self.rows}, {self.cols})'
 
     def __str__(self):
+        """
+        Does two things:
+        =============================
+        
+        chr() essentailly makes you input a 
+        number and then spits out a character.
+        Maps this to the rows of the game, battle-ship
+        style. (dictionary translation)
+        
+        Process goes to:
+        array -> dictionary -> dataframe
+        
+        Dataframe helps with the 
+        visual aspect of the game, because
+        you do not need to manually change
+        the spacing every time it doesn't match.
+        It's neatly monospaced.
+       
+        =============================
+        """
         col_idx = range(self.cols)
         row_idx = [chr(letter) for letter in range(65, 65+self.rows)]
         board_emoji = np.array([[EMOJI[val] for val in row] for row in self.state])
