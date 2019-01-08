@@ -27,7 +27,12 @@ class Board:
     def __str__(self):
         """
         Does two things:
-        =============================
+        ==========================================================
+        
+        Initially, you have arrays that have
+        a specific value to them, like 1 and
+        -1. We can assign these numbers a different
+        value. In this case, an emoji.
         
         chr() essentailly makes you input a 
         number and then spits out a character.
@@ -43,7 +48,12 @@ class Board:
         the spacing every time it doesn't match.
         It's neatly monospaced.
        
-        =============================
+        The 65 represents the the letter a in the
+        alphabet. Looping over this means you can
+        include the entire alphabet when playing
+        the game.
+        
+        ==========================================================
         """
         col_idx = range(self.cols)
         row_idx = [chr(letter) for letter in range(65, 65+self.rows)]
