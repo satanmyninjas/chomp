@@ -62,8 +62,14 @@ class Board:
         return str(board_df)
 
     def take(self, row, col):
-        pass
+        
+        board = Board(x, y)
 
+        x = self.row
+        y = self.col
+        one = "1"
+        for one in range(x, y):
+            return one.append('0') in board.__str__(self)
     
 class Player:
     def __init__(self):
