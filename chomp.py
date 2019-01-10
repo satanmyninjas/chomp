@@ -67,9 +67,10 @@ class Board:
 
         x = self.row
         y = self.col
-        one = "1"
-        for one in range(x, y):
-            return one.append('0') in board.__str__(self)
+        
+        for ['1'] in range(x, y):
+          ['1'] == ['0']
+          return self.state
     
 class Player:
     def __init__(self):
