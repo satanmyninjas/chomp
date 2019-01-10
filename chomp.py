@@ -34,15 +34,15 @@ class Board:
         -1. We can assign these numbers a different
         value. In this case, an emoji.
         
-        chr() essentailly makes you input a 
+        chr() essentially makes you input a
         number and then spits out a character.
         Maps this to the rows of the game, battle-ship
         style. (dictionary translation)
         
         Process goes to:
-        array -> dictionary -> dataframe
+        array -> dictionary -> data-frame
         
-        Dataframe helps with the 
+        Data-frame helps with the
         visual aspect of the game, because
         you do not need to manually change
         the spacing every time it doesn't match.
@@ -63,11 +63,14 @@ class Board:
 
     def take(self, row, col):
 
-        x = self.row
-        y = self.col
-        
-        for _ in x and y:
-          return self.state[x][y] = 0
+        x = self.cols
+        y = self.rows
+        one_lst = list(1)
+
+        if one_lst in x and y:
+            for one_lst in (x, y):
+                one_lst = 0
+            return self.state
     
 class Player:
     def __init__(self):
