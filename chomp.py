@@ -62,15 +62,12 @@ class Board:
         return str(board_df)
 
     def take(self, row, col):
-        
-        board = Board(x, y)
 
         x = self.row
         y = self.col
         
-        for ['1'] in range(x, y):
-          ['1'] == ['0']
-          return self.state
+        for _ in x and y:
+          return self.state[x][y] = 0
     
 class Player:
     def __init__(self):
