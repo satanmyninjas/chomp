@@ -65,12 +65,10 @@ class Board:
 
         x = self.cols
         y = self.rows
-        one_lst = list(1)
 
-        if one_lst in x and y:
-            for one_lst in (x, y):
-                one_lst = 0
-            return self.state
+        for _ in x, y:
+          if self.state[0] = ['1']:
+            self.state[x][y] = 0
     
 class Player:
     def __init__(self):
