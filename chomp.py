@@ -66,9 +66,11 @@ class Board:
         x = self.cols
         y = self.rows
 
+
+        s = self.state[x][y:] = 0
+
         for _ in x, y:
-          if self.state[0] = ['1']:
-            self.state[x][y] = 0
+            return s
     
 class Player:
     def __init__(self):
