@@ -63,10 +63,8 @@ class Board:
 
     def take(self, row, col):
 
-        x = self.cols
-        y = self.rows
-
-
+        x = self.row
+        y = self.col
         s = self.state[x][y:] = 0
 
         for _ in x, y:
