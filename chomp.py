@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import random
 
 EMOJI = {-1: '\u2612', 0: ' ', 1: '\u2610'}
 
@@ -10,6 +11,20 @@ class ChompGame:
 
     def __repr__(self):
         pass
+
+    def coin_toss(self):
+        # import chomp
+        # a = chomp.ChompGame
+        # a.coin_toss()
+        print(random.choice(['heads', 'tails']))
+
+    def game_over(self):
+        pass
+        # if ___ == ___
+        # print("GAME OVER")
+        # again = input("Play again? [Y]/n:").lower()
+        # if again == "n":
+        # break
 
 
 class Board:
@@ -68,7 +83,17 @@ class Board:
     
 class Player:
     def __init__(self):
-        pass
+
+        player_1_name = input("Enter Player 1's name: ")
+        player_2_name = input("Enter Player 2's name: ")
+
+        while True:
+          if player_1_name.coin_toss() == "heads":
+              f'{player_1_name} will go first.'
+              break
+          else:
+              f'{player_2_name} will go first.'
+
 
     def __repr__(self):
         pass
