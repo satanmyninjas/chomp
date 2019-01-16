@@ -6,17 +6,13 @@ EMOJI = {-1: '\u2612', 0: ' ', 1: '\u2610'}
 
 
 class ChompGame:
-    def __init__(self):
-        pass
+    def __init__(self,size=(3,4)):
+        self.p1 = Player()
+        self.p2 = Player()
+        self.turn = random.choice([self.p1,self.p2])
 
     def __repr__(self):
         pass
-
-    def coin_toss(self):
-        # import chomp
-        # a = chomp.ChompGame
-        # a.coin_toss()
-        print(random.choice(['heads', 'tails']))
 
     def game_over(self):
         pass
@@ -25,6 +21,7 @@ class ChompGame:
         # again = input("Play again? [Y]/n:").lower()
         # if again == "n":
         # break
+        # Courtesy of Petra. :) <3
 
 
 class Board:
@@ -82,18 +79,9 @@ class Board:
             self.state[r][col:] = 0
     
 class Player:
-    def __init__(self):
-
-        player_1_name = input("Enter Player 1's name: ")
-        player_2_name = input("Enter Player 2's name: ")
-
-        while True:
-          if player_1_name.coin_toss() == "heads":
-              f'{player_1_name} will go first.'
-              break
-          else:
-              f'{player_2_name} will go first.'
-
-
+    def __init__(self,score=0,name=None):
+        self.score = score
+        self.name = input("Enter your name: ")
+        
     def __repr__(self):
-        pass
+        return f'Player(score={self.score},name={self.name})'
