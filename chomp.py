@@ -62,13 +62,9 @@ class Board:
         return str(board_df)
 
     def take(self, row, col):
-
-        x = self.row
-        y = self.col
-        s = self.state[x][y:] = 0
-
-        for _ in x, y:
-            return s
+        
+        for r in range(row+1):
+            self.state[r][col:] = 0
     
 class Player:
     def __init__(self):
