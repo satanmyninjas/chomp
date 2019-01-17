@@ -12,10 +12,18 @@ class ChompGame:
         self.turn = random.choice([self.p1,self.p2])
 
     def __repr__(self):
-        pass
+        return f'ChompGame(board size = {size})'
 
     def game_over(self):
-        pass
+          while True:
+            if self.score(self.p1) > self.score(self.p2):
+                return f'Player 1 wins the game. GAME OVER! '
+            elif self.score(self.p2) > self.score(self.p2):
+                return f'Player 2 wins the game. GAME OVER! '
+            else:
+                try_again = input("Would you like to play again? [y / n] ")
+                if try_again == "n":
+                    break
         # if ___ == ___
         # print("GAME OVER")
         # again = input("Play again? [Y]/n:").lower()
@@ -73,8 +81,7 @@ class Board:
         board_df = pd.DataFrame(data=board_emoji, index=row_idx, columns=col_idx)
         return str(board_df)
 
-    def take(self, row, col):
-        
+    def take(self, row, col):        
         for r in range(row+1):
             self.state[r][col:] = 0
     
