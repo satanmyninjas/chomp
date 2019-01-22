@@ -14,8 +14,19 @@ class ChompGame:
     def __repr__(self):
         return f'ChompGame(board size = {size})'
 
+    def play(self):
+        f'Welcome to Chomp!\
+{self.state}'
+        # setup stuff: players, board size, etc.
+        while not self.game_over:
+            self.turn(self.take(row, col))
+            for _ in self.turn(self.take(row, col)):
+                if self.take < 1:
+                    self.game_over
+
     def game_over(self):
-          while True:
+        pass
+        while True:
             if self.score(self.p1) > self.score(self.p2):
                 return f'Player 1 wins the game. GAME OVER! '
             elif self.score(self.p2) > self.score(self.p2):
@@ -24,12 +35,6 @@ class ChompGame:
                 try_again = input("Would you like to play again? [y / n] ")
                 if try_again == "n":
                     break
-        # if ___ == ___
-        # print("GAME OVER")
-        # again = input("Play again? [Y]/n:").lower()
-        # if again == "n":
-        # break
-        # Courtesy of Petra. :) <3
 
 
 class Board:
@@ -84,7 +89,8 @@ class Board:
     def take(self, row, col):        
         for r in range(row+1):
             self.state[r][col:] = 0
-    
+
+
 class Player:
     def __init__(self,score=0,name=None):
         self.score = score
