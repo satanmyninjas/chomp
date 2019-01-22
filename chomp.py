@@ -15,26 +15,37 @@ class ChompGame:
         return f'ChompGame(board size = {size})'
 
     def play(self):
-        f'Welcome to Chomp!\
-{self.state}'
+        f'Welcome to Chomp!\n
+        {self.state}'
         # setup stuff: players, board size, etc.
         while not self.game_over:
-            self.turn(self.take(row, col))
-            for _ in self.turn(self.take(row, col)):
+            self.state(self.take(row,col))
+            # **trying** to establish a player turn and allow user
+            # to make input in one line
+            for _ in self.turn(self.take(row,col)):
+                # for every turn, check if the board has all 0s
+                # if it meets that conditional, run the game_over
                 if self.take < 1:
                     self.game_over
 
     def game_over(self):
+        # pretty sure it doesn't even work, putting a pass until
+        # i fix it later
         pass
         while True:
             if self.score(self.p1) > self.score(self.p2):
                 return f'Player 1 wins the game. GAME OVER! '
+            # if player 1 has a bigger score, player 1 wins.
             elif self.score(self.p2) > self.score(self.p2):
                 return f'Player 2 wins the game. GAME OVER! '
+            # if player 2 has a bigger score, then player 2 wins.
             else:
                 try_again = input("Would you like to play again? [y / n] ")
                 if try_again == "n":
                     break
+                    # will prompt user to play again, if they say no,
+                    # stop the game
+        # Courtesy of Petra. :) <3
 
 
 class Board:
