@@ -6,6 +6,7 @@ EMOJI = {-1: '\u2612', 0: ' ', 1: '\u2610'}
 
 
 class ChompGame:
+    from chomp import Board
     def __init__(self,size=(3,4)):
         self.p1 = Player()
         self.p2 = Player()
@@ -15,7 +16,8 @@ class ChompGame:
         return f'ChompGame(board size = {size})'
 
     def play(self):
-        f'Welcome to Chomp!\n
+        # jesus christ this code is trash
+        f'Welcome to Chomp!\
         {self.state}'
         # setup stuff: players, board size, etc.
         while not self.game_over:
