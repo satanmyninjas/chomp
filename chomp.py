@@ -6,48 +6,41 @@ EMOJI = {-1: '\u2612', 0: ' ', 1: '\u2610'}
 
 
 class ChompGame:
-    from chomp import Board
-    def __init__(self,size=(3,4)):
-        self.p1 = Player()
-        self.p2 = Player()
-        self.turn = random.choice([self.p1,self.p2])
+    """Contains the control flow for the game"""
+    def __init__(self, n_players=2, size=(3, 4)):
+        self.n_players = n_players
+        self.size = size
+        self.board = Board(*size)
+        self.game_over = False
+        self.players = []
+        self.current_player = None
 
     def __repr__(self):
-        return f'ChompGame(board size = {size})'
+        return f'ChompGame({self.n_players}, {self.size})'
 
     def play(self):
-        # jesus christ this code is trash
-        f'Welcome to Chomp!\
-        {self.state}'
-        # setup stuff: players, board size, etc.
+        self.setup()
         while not self.game_over:
-            self.state(self.take(row,col))
-            # **trying** to establish a player turn and allow user
-            # to make input in one line
-            for _ in self.turn(self.take(row,col)):
-                # for every turn, check if the board has all 0s
-                # if it meets that conditional, run the game_over
-                if self.take < 1:
-                    self.game_over
+            print(f'{self.current_player}, it\'s your turn!\n')
+            print(self.board)
+            self.move()
+            if self.board.state[-1][0] == 0:
+                self.game_over = True
+                self.current_player.wins += 1
 
-    def game_over(self):
-        # pretty sure it doesn't even work, putting a pass until
-        # i fix it later
-        pass
-        while True:
-            if self.score(self.p1) > self.score(self.p2):
-                return f'Player 1 wins the game. GAME OVER! '
-            # if player 1 has a bigger score, player 1 wins.
-            elif self.score(self.p2) > self.score(self.p2):
-                return f'Player 2 wins the game. GAME OVER! '
-            # if player 2 has a bigger score, then player 2 wins.
-            else:
-                try_again = input("Would you like to play again? [y / n] ")
-                if try_again == "n":
-                    break
-                    # will prompt user to play again, if they say no,
-                    # stop the game
-        # Courtesy of Petra. :) <3
+    def setup(self):
+        for i in range(1, self.n_players + 1):
+            print(f'***Player {i}***')
+            self.players.append(Player())
+
+        self.current_player = random.choice(self.players)
+
+    def move(self):
+        coord_str = input("Enter the coordinates for your move. (e.g. A3)")
+        row_str, col_str = coord_str[0].upper(), coord_str[1]
+        row = ord(row_str) - 65
+        col = int(col_str)
+        self.board.take(row, col)
 
 
 class Board:
@@ -63,6 +56,29 @@ class Board:
         return f'Board({self.rows}, {self.cols})'
 
     def __str__(self):
+        col_idx = range(self.cols)
+        row_idx = [chr(letter) for letter in range(65, 65+self.rows)]
+        board_emoji = np.array([[EMOJI[val] for val in row] for row in self.state])
+        board_df = pd.DataFrame(data=board_emoji, index=row_idx, columns=col_idx)
+        return str(board_df)
+
+    def take(self, row, col):
+        # self.state[:row+1, col:] = 0
+        for r in range(row+1):
+            self.state[r][col:] = 0
+
+
+class Player:
+    def __init__(self):
+        self.name = input("\tEnter your name: ")
+        self.wins = 0
+
+    def __repr__(self):
+        return f'Player({self.name})'
+
+    def __str__(self):
+        return self.name
+
         """
         Does two things:
         ==========================================================
@@ -93,21 +109,3 @@ class Board:
         
         ==========================================================
         """
-        col_idx = range(self.cols)
-        row_idx = [chr(letter) for letter in range(65, 65+self.rows)]
-        board_emoji = np.array([[EMOJI[val] for val in row] for row in self.state])
-        board_df = pd.DataFrame(data=board_emoji, index=row_idx, columns=col_idx)
-        return str(board_df)
-
-    def take(self, row, col):        
-        for r in range(row+1):
-            self.state[r][col:] = 0
-
-
-class Player:
-    def __init__(self,score=0,name=None):
-        self.score = score
-        self.name = input("Enter your name: ")
-        
-    def __repr__(self):
-        return f'Player(score={self.score},name={self.name})'
