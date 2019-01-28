@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import random
+import itertools
 
 EMOJI = {-1: '\u2612', 0: ' ', 1: '\u2610'}
 
@@ -19,6 +20,7 @@ class ChompGame:
         return f'ChompGame({self.n_players}, {self.size})'
 
     def play(self):
+        # TODO: Fix game over condition when loser is actually the winner
         self.setup()
         while not self.game_over:
             print(f'{self.current_player}, it\'s your turn!\n')
@@ -29,6 +31,7 @@ class ChompGame:
                 self.current_player.wins += 1
 
     def setup(self):
+        # TODO: Look up docs for itertools.cycle to fix turns for players
         for i in range(1, self.n_players + 1):
             print(f'***Player {i}***')
             self.players.append(Player())
@@ -79,33 +82,53 @@ class Player:
     def __str__(self):
         return self.name
 
-        """
-        Does two things:
-        ==========================================================
+"""
+Does two things:
+==========================================================
         
-        Initially, you have arrays that have
-        a specific value to them, like 1 and
-        -1. We can assign these numbers a different
-        value. In this case, an emoji.
+Initially, you have arrays that have
+a specific value to them, like 1 and
+-1. We can assign these numbers a different
+value. In this case, an emoji.
         
-        chr() essentially makes you input a
-        number and then spits out a character.
-        Maps this to the rows of the game, battle-ship
-        style. (dictionary translation)
+chr() essentially makes you input a
+number and then spits out a character.
+Maps this to the rows of the game, battle-ship
+style. (dictionary translation)
         
-        Process goes to:
-        array -> dictionary -> data-frame
+Process goes to:
+array -> dictionary -> data-frame
         
-        Data-frame helps with the
-        visual aspect of the game, because
-        you do not need to manually change
-        the spacing every time it doesn't match.
-        It's neatly monospaced.
+Data-frame helps with the
+visual aspect of the game, because
+you do not need to manually change
+the spacing every time it doesn't match.
+It's neatly monospaced.
        
-        The 65 represents the the letter a in the
-        alphabet. Looping over this means you can
-        include the entire alphabet when playing
-        the game.
-        
-        ==========================================================
-        """
+The 65 represents the the letter a in the
+alphabet. Looping over this means you can
+include the entire alphabet when playing
+the game.
+
+----------------------------------------------------------
+
+**** Yield Docs ****
+
+Yield expressions and statements are only used
+when defining a generator function, and are only
+used in the body of the generator function.
+Using yield in a function definition is sufficient
+to cause that definition to create a generator
+function instead of a normal function.
+
+----------------------------------------------------------
+
+**** itertools.cycle() Docs ****
+
+Make an iterator returning elements from the iterable 
+and saving a copy of each. When the iterable is 
+exhausted, return elements from the saved copy. 
+Repeats indefinitely.
+
+==========================================================
+"""
