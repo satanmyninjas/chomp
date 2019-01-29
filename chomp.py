@@ -29,6 +29,15 @@ class ChompGame:
                 self.game_over = True
                 self.current_player.wins -= 1
                 # just change to opposite
+                
+            elif self.board.state[-1][0] == 0:
+                print(f'{self.current_player[1]}, it\'s your turn!\n')
+                print(self.board)
+                self.move()
+                if self.board.state[-1][0] == 0:
+                    self.game_over = True
+                    self.current_player.wins -= 1
+                # just change to opposite for 2nd player
 
     def setup(self):
         for i in range(1, self.n_players + 2):
@@ -36,8 +45,10 @@ class ChompGame:
             self.players.append(Player())
 
         self.current_player = self.player_select_generator()
+        # self.current_player = self.player_select_generator()
 
-    def player_select_generator(self):
+# probably an unneeded function
+    def player_select_generator(self): pass
         i = 0
         for player in itertools.cycle(self.players):
             i += 1
