@@ -44,7 +44,7 @@ class ChompGame:
             print(f'***Player {i}***')
             self.players.append(Player())
 
-        self.current_player = self.player_select_generator()
+        self.current_player = random.choice(self.players)
         # self.current_player = self.player_select_generator()
 
 # probably an unneeded function
