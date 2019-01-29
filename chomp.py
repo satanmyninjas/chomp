@@ -20,7 +20,6 @@ class ChompGame:
         return f'ChompGame({self.n_players}, {self.size})'
 
     def play(self):
-        # TODO: Fix game over condition when loser is actually the winner
         self.setup()
         while not self.game_over:
             print(f'{self.current_player}, it\'s your turn!\n')
@@ -28,15 +27,23 @@ class ChompGame:
             self.move()
             if self.board.state[-1][0] == 0:
                 self.game_over = True
-                self.current_player.wins += 1
+                self.current_player.wins -= 1
+                # just change to opposite
 
     def setup(self):
-        # TODO: Look up docs for itertools.cycle to fix turns for players
         for i in range(1, self.n_players + 1):
             print(f'***Player {i}***')
             self.players.append(Player())
 
-        self.current_player = random.choice(self.players)
+        self.current_player = self.player_select_generator()
+
+    def player_select_generator(self):
+        i = 0
+        for player in itertools.cycle(self.players):
+            i += 1
+            if i == 10:
+                break
+            return i, player
 
     def move(self):
         coord_str = input("Enter the coordinates for your move. (e.g. A3)")
