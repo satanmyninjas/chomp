@@ -31,7 +31,7 @@ class ChompGame:
                 # just change to opposite
 
     def setup(self):
-        for i in range(1, self.n_players + 1):
+        for i in range(1, self.n_players + 2):
             print(f'***Player {i}***')
             self.players.append(Player())
 
