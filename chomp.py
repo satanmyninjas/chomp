@@ -22,42 +22,39 @@ class ChompGame:
     def play(self):
         self.setup()
         while not self.game_over:
-            print(f'{self.current_player}, it\'s your turn!\n')
+            print(f'{self.current_player}, it\'s your turn! \n')
             print(self.board)
             self.move()
             if self.board.state[-1][0] == 0:
                 self.game_over = True
                 self.current_player.wins -= 1
-                # just change to opposite
-                
             elif self.board.state[-1][0] == 0:
-                print(f'{self.current_player[1]}, it\'s your turn!\n')
-                print(self.board)
-                self.move()
-                if self.board.state[-1][0] == 0:
-                    self.game_over = True
-                    self.current_player.wins -= 1
-                # just change to opposite for 2nd player
+                self.game_over = True
+                self.current_player[1].wins -= 1
 
     def setup(self):
-        for i in range(1, self.n_players + 2):
+        for i in range(1, self.n_players + 1):
             print(f'***Player {i}***')
             self.players.append(Player())
 
         self.current_player = random.choice(self.players)
-        # self.current_player = self.player_select_generator()
+        # self.current_player = self.player_cycle() <- w/ function
+        # self.current_player = random.choice(self.players) <- original
+        # keeping original code just in case
 
-# probably an unneeded function
-    def player_select_generator(self): pass
+    # probably an unneeded function
+    """
+    def player_cycle(self):
         i = 0
         for player in itertools.cycle(self.players):
             i += 1
-            if i == 10:
+            if i == 3:
                 break
             return i, player
+    """
 
     def move(self):
-        coord_str = input("Enter the coordinates for your move. (e.g. A3)")
+        coord_str = input("Enter the coordinates for your move. (e.g. A3) ")
         row_str, col_str = coord_str[0].upper(), coord_str[1]
         row = ord(row_str) - 65
         col = int(col_str)
@@ -99,6 +96,10 @@ class Player:
 
     def __str__(self):
         return self.name
+
+
+if __name__ == "__main__":
+    ChompGame().play()
 
 """
 Does two things:
